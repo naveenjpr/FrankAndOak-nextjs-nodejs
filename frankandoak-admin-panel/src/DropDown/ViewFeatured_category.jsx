@@ -9,14 +9,17 @@ import { Link } from "react-router-dom"
 export default function ViewFeatured_category() {
   const [viewparentCategory, setviewparentCategory] = useState([])
   const [statuschange, setstatuschange] = useState(false)
+  const [myimageupload, setmyimageupload] = useState()
+  
 
   let Featured_category = () => {
     axios
       .post("http://localhost:5000/api/backend/Featured_Categories/view")
 
       .then((result) => {
+        // return console.log(result.data)
         if (result.data.status == true) {
-          // console.log(result.data)
+          setmyimageupload(result.data.imagePath)
           setviewparentCategory(result.data.data)
         } else {
           setviewparentCategory([])
@@ -76,33 +79,8 @@ export default function ViewFeatured_category() {
         toast.error("Something went wrong")
       })
   }
-  // const [allInputs, setAllInputs] = useState([])
-  // console.log(allInputs)
+
   let [courseIds, setCourseIds] = useState([])
-
-  // let multiple_select = (id) => {
-  //   console.log(id)
-  //   // let { value, checked } = e.target
-
-  //   // if (checked == true) {
-  //   //   setAllInputs((v) => [...v, value])
-  //   // } else {
-  //   //   setAllInputs((v) => v.filter((item) => item != value))
-  //   // }
-  //   let updateCourseIds = [...courseIds]
-  //   console.log(updateCourseIds)
-
-  //   if (updateCourseIds.includes(id)) {
-  //     updateCourseIds = updateCourseIds.filter((course_id) => {
-  //       console.log(course_id)
-  //       return course_id != id
-  //     })
-  //   } else {
-  //     updateCourseIds.push(id)
-  //   }
-
-  //   setCourseIds(updateCourseIds)
-  // }
 
   const multiple_select = (id) => {
     if (!id) {
@@ -242,8 +220,9 @@ export default function ViewFeatured_category() {
 
                         <tbody>
                           {viewparentCategory &&
-                          viewparentCategory.length > 0 > 0 ? (
+                          viewparentCategory.length > 0 ? (
                             viewparentCategory.map((v, i) => {
+                              console.log(v.imageUrl)
                               return (
                                 <tr
                                   key={i}
@@ -273,7 +252,12 @@ export default function ViewFeatured_category() {
                                     {v.price || "N/A"}
                                   </td>
                                   <td className="border-[black] px-1 border py-4 text-sm text-gray-900">
-                                    {v.imageUrl || "N/A"}
+                                  
+                                    <img
+                                      src={myimageupload + v.imageUrl}
+                                      className="w-[100px] h-[100px] "
+                                    />
+                                    
                                   </td>
                                   <td className="border-[black] px-1 border py-4 text-sm text-gray-900">
                                     {v.status ? (

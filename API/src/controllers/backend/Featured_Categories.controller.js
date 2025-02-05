@@ -1,16 +1,24 @@
 const productcategory = require("../../models/Featured_Categories.scheme")
 
 exports.create = async (request, response) => {
+  console.log(request.body)
+  console.log(request.file)
   const data = new productcategory({
     cloth_heading: request.body.cloth_heading,
     cloth_sub_heading: request.body.cloth_sub_heading,
     status: request.body.status,
     price: request.body.price,
     description: request.body.description,
-    imageUrl: request.body.imageUrl,
+    imageUrl: request.file ? request.file.filename : "", // Store filename if exists
     updated_at: Date.now(),
     deleted_at: "",
   })
+  // if (request.file != undefined) {
+  //   if (request.file.filename != "") {
+  //     data.imageUrl = request.file.filename
+  //   }
+  // }
+
   var output = await data
     .save()
     .then((success) => {
@@ -75,6 +83,8 @@ exports.view = async (request, response) => {
       let resp = {
         status: true,
         message: "record found successfull",
+        imagePath: "http://localhost:5000/uploads/courses/",
+
         data: Featured_category,
       }
       response.send(resp)
@@ -138,9 +148,8 @@ exports.multiple_delete = async (request, response) => {
 
   let ids = request.body
 
-  // await productcategory.deleteMany({ _id: { $in: ids } })
-  // response.status(200).json({ message: "done delete" })
-  await productcategory.updateMany(
+  await productcategory
+    .updateMany(
       {
         _id: { $in: request.body.ids },
       },
@@ -170,14 +179,14 @@ exports.update = async (request, response) => {
   data = {
     cloth_heading: request.body.cloth_heading,
     cloth_sub_heading: request.body.cloth_sub_heading,
-    imageUrl: request.body.imageUrl,
+    // imageUrl: request.body.imageUrl,
     price: request.body.price,
     description: request.body.description,
     status: request.body.status ?? 1,
   }
   if (request.file != undefined) {
     if (request.file.filename != "") {
-      data.image = request.file.filename
+      data.imageUrl = request.file.filename
     }
   }
   await productcategory

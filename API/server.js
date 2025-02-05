@@ -8,6 +8,11 @@ server.use(cors())
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
 
+
+// Serve uploaded images statically
+
+server.use("/uploads/courses", express.static("uploads/courses"))
+
 // Routes
 server.get("/", (request, response) => {
   response.send("Server Working Fine.....")

@@ -3,7 +3,7 @@ import Header from "../Common/Header"
 import Dashboard from "../Middle-Section/Dashboard"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import axios from "axios"
+import axios, { toFormData } from "axios"
 import { useNavigate, useParams } from "react-router"
 
 export default function AddFeatured_category() {
@@ -14,7 +14,7 @@ export default function AddFeatured_category() {
     cloth_heading: "",
     cloth_sub_heading: "",
     cloth_price: "",
-    cloth_image: "",
+    imageUrl: "",
     cloth_status: "",
   })
 
@@ -31,7 +31,7 @@ export default function AddFeatured_category() {
             cloth_heading: result.data.data.cloth_heading,
             cloth_sub_heading: result.data.data.cloth_sub_heading,
             cloth_price: result.data.data.price,
-            cloth_image: result.data.data.imageUrl,
+            imageUrl: result.data.data.imageUrl,
             cloth_status: result.data.data.status,
           })
         })
@@ -50,18 +50,24 @@ export default function AddFeatured_category() {
     } else {
       var status = event.target.cloth_status.value
     }
+    let form = new FormData(event.target)
+
     let dataSave = {
-      cloth_heading: event.target.cloth_heading.value,
-      cloth_sub_heading: event.target.cloth_sub_heading.value,
-      price: event.target.cloth_price.value,
-      imageUrl: event.target.cloth_image.value,
+      cloth_heading: form.get("cloth_heading"),
+      cloth_sub_heading: form.get("cloth_sub_heading"),
+      price: form.get("cloth_price"),
+
       status: status,
+    }
+
+    if (form.get("imageUrl") != "") {
+      dataSave.imageUrl = form.get("imageUrl")
     }
     if (parsms.id == undefined) {
       axios
         .post(
           "http://localhost:5000/api/backend/Featured_Categories/add",
-          dataSave
+          toFormData(dataSave)
         )
         .then((result) => {
           if (result.data.status === true) {
@@ -80,7 +86,7 @@ export default function AddFeatured_category() {
       axios
         .put(
           "http://localhost:5000/api/backend/Featured_Categories/update",
-          dataSave
+          toFormData(dataSave)
         )
 
         .then((result) => {
@@ -125,7 +131,7 @@ export default function AddFeatured_category() {
                 Our best categories at their best prices ever{" "}
               </h1>
               <div className="bg-white p-[10px] rounded-[5px]">
-                <form onSubmit={submitHandler}>
+                <form onSubmit={submitHandler} enctype="multipart/form-data">
                   <div className="">
                     <label className=" capitalize">cloth_heading</label>
                     <input
@@ -160,15 +166,11 @@ export default function AddFeatured_category() {
                     <h1 className="pb-[13px]">cloth image</h1>
                     <div className="mb-[10px]  flex">
                       <input
-                        type="text"
-                        name="cloth_image"
+                        type="file"
+                        name="imageUrl"
                         className="border-[2px] border-[solid] w-[50%] h-[50px] rounded-[5px]"
-                        onChange={inputHander}
-                        value={input.cloth_image}
                       />
-                      <button className="bg-[blue] py-[10px] px-[30px] text-white rounded-[0px_15px_15px_0px]">
-                        Upload
-                      </button>
+
                       <img src="" alt="" />
                     </div>
                   </div>
@@ -207,7 +209,9 @@ export default function AddFeatured_category() {
                         update
                       </button>
                     )}
-                    <button className="text-white bg-[#4c1d95] table px-[15px] py-[5px] rounded-[15px]">cancel</button>
+                    <button className="text-white bg-[#4c1d95] table px-[15px] py-[5px] rounded-[15px]">
+                      cancel
+                    </button>
                   </div>
                 </form>
               </div>
