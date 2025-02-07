@@ -97,7 +97,7 @@ export default function Seasonmusthaves() {
           <Slider {...settings}>
             {catimages.map((v, i) => {
               return (
-                <div className="px-[11px] mx-[10px]">
+                <div className="px-[11px] mx-[10px]" key={i}>
                   <div className=" relative group duration-500 ">
                     <img
                       src={v.image1.src}
@@ -133,7 +133,7 @@ export default function Seasonmusthaves() {
           <Slider {...settings}>
             {catimages.map((v, i) => {
               return (
-                <div className="px-[11px] mx-[10px]">
+                <div className="px-[11px] mx-[10px]" key={i}>
                   <div className=" relative group duration-500 ">
                     <img
                       src={v.image1.src}

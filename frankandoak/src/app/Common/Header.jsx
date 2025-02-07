@@ -141,18 +141,14 @@ export default function Header() {
                             <h1 className="font-[500] pt-[18px]">Featured</h1>
 
                             <ul className="pt-[15px]">
-                              {categories1.map((v, i) => {
-                                return (
-                                  <>
-                                    <li
-                                      className="font-[500] text-[14px] pb-[5px]"
-                                      key={i}
-                                    >
-                                      {v}
-                                    </li>
-                                  </>
-                                )
-                              })}
+                              {categories1.map((v, i) => (
+                                <li
+                                  key={i}
+                                  className="font-[500] text-[14px] pb-[5px]"
+                                >
+                                  {v}
+                                </li>
+                              ))}
                             </ul>
                           </div>
                           <div>
@@ -405,22 +401,18 @@ export default function Header() {
             </div>
 
             <div className="">
-              <ul className="flex justify-end  font-[600]  text-[30px] ">
-                {icons.map((v, i) => {
-                  // console.log(v)
-                  return (
-                    <>
-                      <li
-                        className="pr-[30px] cursor-pointer"
-                        key={i}
-                        onClick={() => modalshow(v, i)}
-                      >
-                        {v.component}
-                      </li>
-                    </>
-                  )
-                })}
+              <ul className="flex justify-end font-[600] text-[30px]">
+                {icons.map((v, i) => (
+                  <li
+                    key={i} // ✅ Add key here
+                    className="pr-[30px] cursor-pointer"
+                    onClick={() => modalshow(v, i)}
+                  >
+                    {v.component}
+                  </li>
+                ))}
               </ul>
+
               <div
                 className={`w-[700px] duration-500 bg-white h-[500px] fixed left-[50%] top-[-1000px] translate-x-[-50%] translate-y-[-50%] z-[999] ${
                   loginmodal == true ? "top-[50%]" : ""

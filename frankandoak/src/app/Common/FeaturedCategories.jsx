@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { catimages, images } from "../Common/Myarray"
 import Image from "next/image"
 import dresses1 from "../../../public/dress_9094f9f3-19a3-47a9-bab6-ec506941f682_900x.webp"
@@ -7,7 +7,23 @@ import dresses3 from "../../../public/tops_900x.webp"
 import dresses4 from "../../../public/shorts_900x.webp"
 import dresses5 from "../../../public/PLP_thumbnail_image_area_f8bf1730-2a49-4d7e-a730-0c9f8c3e37e3_900x.webp"
 import dresses6 from "../../../public/t-shirt_900x.webp"
+import axios from "axios"
 export default function FeaturedCategories() {
+  const [showdata, setshowdata] = useState([])
+  console.log(showdata)
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:5000/api/frontend/Featured_Categories/view")
+      .then((result) => {
+        setshowdata(result.data.data)
+        console.log(result.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
   const categories = [
     {
       image: dresses1,
@@ -40,21 +56,32 @@ export default function FeaturedCategories() {
         <h1 className="font-[500] ps-[30px] md:text-[30px] text-[20px] md:py-[50px] py-[35px]">
           Featured Categories
         </h1>
-        <div className="grid lg:grid-cols-6 grid-cols-2  gap-[40px] md:px-[25px] px-[12px]">
-          {categories.map((v, i) => {
-            return (
-              <div className="border " key={i}>
-                <img
-                  src={v.image.src}
-                  alt="testing"
-                  className="w-[100%] h-[100%]"
-                />
-                <p className="mt-[5px] md:text-[16px] text-[8px]">
-                  {v.description}
-                </p>
-              </div>
-            )
-          })}
+        <div className="grid lg:grid-cols-4 grid-cols-2  gap-[40px] md:px-[25px] px-[12px] cursor-pointer">
+          {showdata.length > 0
+            ? showdata.map((v, i) => (
+                <div className="border" key={i}>
+                  <img
+                    src={`http://localhost:5000/uploads/courses/${v.imageUrl}`}
+                    alt="testing"
+                    className="w-[100%] h-[100%]"
+                  />
+                  <p className="mt-[5px] md:text-[16px] text-[8px] font-medium">
+                    {v.cloth_heading}
+                  </p>
+                </div>
+              ))
+            : categories.map((v, i) => (
+                <div className="border" key={i}>
+                  <img
+                    src={v.image.src}
+                    alt="testing"
+                    className="w-[100%] h-[100%]"
+                  />
+                  <p className="mt-[5px] md:text-[16px] text-[8px]">
+                    {v.description}
+                  </p>
+                </div>
+              ))}
         </div>
       </div>
     </>
