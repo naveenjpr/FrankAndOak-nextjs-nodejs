@@ -21,8 +21,11 @@ import StoryDetails from "./DropDown/StoryDetails"
 import StoryView from "./DropDown/StoryView"
 import SlidesDetails from "./DropDown/SlidesDetails"
 import SlidesView from "./DropDown/SlidesView"
-import ViewFeatured_category from "./DropDown/ViewFeatured_category"
-import AddFeatured_category from "./DropDown/AddFeatured_category"
+
+import Viewtabingcategory from "./DropDown/Tab category/Viewtabingcategory.jsx"
+import Addtabingcatrgory from "./DropDown/Tab category/Addtabingcatrgory.jsx"
+import ViewFeatured_category from "./DropDown/Featured_category/ViewFeatured_category.jsx"
+import AddFeatured_category from "./DropDown/Featured_category/AddFeatured_category.jsx"
 
 const router = createBrowserRouter([
   {
@@ -33,6 +36,7 @@ const router = createBrowserRouter([
     path: "/Dashboard",
     element: <Dashboard />,
   },
+  //Featured_category
   {
     path: "Featured_category/ViewFeatured_category",
     element: <ViewFeatured_category />,
@@ -40,6 +44,15 @@ const router = createBrowserRouter([
   {
     path: "Featured_category/AddFeatured_category/:id?",
     element: <AddFeatured_category />,
+  },
+  //Tabing_Category
+  {
+    path: "Tabing_Category/View_Tabing_Category",
+    element: <Viewtabingcategory />,
+  },
+  {
+    path: "Tabing_Category/Add_Tabing_Category/:id?",
+    element: <Addtabingcatrgory />,
   },
   {
     path: "Parent-Category/ViewParentCategory",
@@ -101,6 +114,8 @@ const router = createBrowserRouter([
     path: "Slider/Slider-View",
     element: <SlidesView />,
   },
+  // 🔥 Catch-all route for 404 pages
+  // { path: "*", element: <NotFoundPage /> },
 ])
 
 ReactDOM.createRoot(document.getElementById("root")).render(

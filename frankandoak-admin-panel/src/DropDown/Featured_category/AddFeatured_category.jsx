@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import Header from "../Common/Header"
-import Dashboard from "../Middle-Section/Dashboard"
+import Header from "../../Common/Header"
+import Dashboard from "../../Middle-Section/Dashboard"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import axios, { toFormData } from "axios"
@@ -128,7 +128,9 @@ export default function AddFeatured_category() {
           <div className="w-[100%] bg-[#e0e7ff]">
             <div className="w-[95%] mx-auto  ">
               <h1 className="font-semibold text-[25px] pt-[20px] pb-[10px] capitalize">
-                Our best categories at their best prices ever{" "}
+                Our best
+                <span className="text-[orange] mx-2">Featured Categories</span>
+                at their best prices ever
               </h1>
               <div className="bg-white p-[10px] rounded-[5px]">
                 <form onSubmit={submitHandler} enctype="multipart/form-data">

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
-import Header from "../Common/Header"
-import Dashboard from "../Middle-Section/Dashboard"
+import Header from "../../Common/Header"
+import Dashboard from "../../Middle-Section/Dashboard"
 import { useState } from "react"
 import axios from "axios"
 import { ToastContainer, toast } from "react-toastify"
@@ -10,7 +10,6 @@ export default function ViewFeatured_category() {
   const [viewparentCategory, setviewparentCategory] = useState([])
   const [statuschange, setstatuschange] = useState(false)
   const [myimageupload, setmyimageupload] = useState()
-  
 
   let Featured_category = () => {
     axios
@@ -152,9 +151,13 @@ export default function ViewFeatured_category() {
           </div>
           <div className="bg-[#d8d8ef] w-[100%]  ">
             <div className="w-[95%]   mx-auto">
-              <div className="flex md:flex-row flex-col justify-between  md:max-w-[95%]  mt-[60px]">
+              <div className="flex md:flex-row flex-col justify-between  md:max-w-[95%]  mt-[10px]">
                 <h1 className="capitalize font-bold md:text-[25px] text-[25px] md:text-left text-center">
-                  welcome to view course table
+                  welcome to
+                  <span className="text-[orange]">
+                    {" "}
+                    view Featured Categories{" "}
+                  </span>
                 </h1>
                 <div className="border rounded overflow-hidden flex md:flex-row flex-col">
                   <input
@@ -252,12 +255,10 @@ export default function ViewFeatured_category() {
                                     {v.price || "N/A"}
                                   </td>
                                   <td className="border-[black] px-1 border py-4 text-sm text-gray-900">
-                                  
                                     <img
                                       src={myimageupload + v.imageUrl}
                                       className="w-[100px] h-[100px] "
                                     />
-                                    
                                   </td>
                                   <td className="border-[black] px-1 border py-4 text-sm text-gray-900">
                                     {v.status ? (

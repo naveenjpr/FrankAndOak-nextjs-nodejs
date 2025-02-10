@@ -30,6 +30,20 @@ export default function Dashboard() {
       ],
     },
     {
+      MenuName: "Tabing Category",
+      icon: <FaBook />,
+      submenuName: [
+        {
+          submenu: "Add Tabing Category",
+          path: "/Tabing_Category/Add_Tabing_Category",
+        },
+        {
+          submenu: "View Tabing Category",
+          path: "/Tabing_Category/View_Tabing_Category",
+        },
+      ],
+    },
+    {
       MenuName: "Size",
       icon: <FaBook />,
       submenuName: [
