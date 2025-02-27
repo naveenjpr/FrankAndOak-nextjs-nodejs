@@ -8,10 +8,10 @@ server.use(cors())
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
 
-
 // Serve uploaded images statically
 
 server.use("/uploads/courses", express.static("uploads/courses"))
+server.use("/uploads/Tabingcategory", express.static("uploads/Tabingcategory"))
 
 // Routes
 server.get("/", (request, response) => {
@@ -22,14 +22,19 @@ server.get("/", (request, response) => {
 require("./src/routes/backend/Featured_Categories.routes")(server)
 require("./src/routes/backend/women.slider.routes")(server)
 require("./src/routes/backend/men.slider.routes")(server)
+require("./src/routes/backend/Tapbing.routes")(server)
 server.get("*", (request, response) => {
   response.send("Page not found.....")
 })
 //Fronted Urls
-// require("./src/routes/backend/slider.routes")(server)
+require("./src/routes/fronted/Featured_Categories.routes")(server)
+require("./src/routes/fronted/Tabing.routes")(server)
+// require("./src/routes/fronted/user.routes")(server)
 
 mongoose // Mongoose connection
-  .connect("mongodb://127.0.0.1:27017/Frank_And_Oak_USA")
+  .connect(
+    "mongodb+srv://naveensainijpr:Gionee123@cluster0.neh2bv1.mongodb.net/frankANDok?retryWrites=true&w=majority&appName=Cluster0"
+  )
   .then(() => {
     server.listen("5000", () => {
       console.log("Database Connected!")

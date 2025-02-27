@@ -10,14 +10,12 @@ import dresses6 from "../../../public/t-shirt_900x.webp"
 import axios from "axios"
 export default function FeaturedCategories() {
   const [showdata, setshowdata] = useState([])
-  console.log(showdata)
 
   useEffect(() => {
     axios
       .post("http://localhost:5000/api/frontend/Featured_Categories/view")
       .then((result) => {
         setshowdata(result.data.data)
-        console.log(result.data)
       })
       .catch((error) => {
         console.log(error)
