@@ -155,7 +155,7 @@ export default function Footer() {
                     name="iShopFor"
                     value="women"
                   />
-                  <label className="" for="iShopForWomen">
+                  <label className="" >
                     Women
                   </label>
                 </span>
@@ -167,9 +167,7 @@ export default function Footer() {
                     name="iShopFor"
                     value="men"
                   />
-                  <label className="" for="iShopForMen">
-                    Men
-                  </label>
+                  <label className="">Men</label>
                 </span>
                 <span className="">
                   <input
@@ -179,7 +177,7 @@ export default function Footer() {
                     name="iShopFor"
                     value="both"
                   />
-                  <label className="" for="iShopForAll">
+                  <label className="" >
                     All
                   </label>
                 </span>

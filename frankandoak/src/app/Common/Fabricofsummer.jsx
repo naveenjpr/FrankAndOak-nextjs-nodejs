@@ -1,6 +1,5 @@
 import React from "react"
 import febric from "../../../public/febric.webp"
-import Image from "next/image"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick"
@@ -51,7 +50,7 @@ export default function Fabricofsummer() {
       <div className="w-[100%] mt-[100px]">
         <div className="w-[95%] mx-auto grid md:grid-cols-2 grid-cols-1 gap-[50px] items-center">
           <div className="">
-            <Image
+            <img
               src={febric}
               className="w-[100%] h-[100%]"
               alt="Picture of the author"

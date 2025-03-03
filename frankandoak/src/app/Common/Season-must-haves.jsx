@@ -142,44 +142,47 @@ export default function Seasonmusthaves() {
 
       <div className="w-[95%] mx-auto">
         <Slider {...settings}>
-          {data.map((v, i) => (
-            <div className="px-3 mx-2" key={i}>
-              <div className="relative group overflow-hidden">
-                {/* Default Image */}
-                <img
-                  src={`http://localhost:5000/uploads/Tabingcategory/${v.frontImage}`}
-                  alt="Product"
-                  width={500}
-                  height={500}
-                  className="transition-opacity duration-300"
-                />
+          {data.length > 0 ? (
+            data.map((v, i) => (
+              <div className="px-3 mx-2" key={i}>
+                <div className="relative group overflow-hidden">
+                  {/* Default Image */}
+                  <img
+                    src={`http://localhost:5000/uploads/Tabingcategory/${v.frontImage}`}
+                    alt="Product"
+                    width={500}
+                    height={500}
+                    className="transition-opacity duration-300"
+                  />
 
-                {/* Hover Image */}
-                <img
-                  src={`http://localhost:5000/uploads/Tabingcategory/${v.backImage}`}
-                  alt="Product Hover"
-                  width={500}
-                  height={500}
-                  className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                />
+                  {/* Hover Image */}
+                  <img
+                    src={`http://localhost:5000/uploads/Tabingcategory/${v.backImage}`}
+                    alt="Product Hover"
+                    width={500}
+                    height={500}
+                    className="absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  />
 
-                {/* Quick Add Button */}
-                <button className="bg-white w-[95%] left-2 h-[50px] text-black absolute bottom-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Quick Add
-                </button>
+                  {/* Quick Add Button */}
+                  <button className="bg-white w-[95%] left-2 h-[50px] text-black absolute bottom-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Quick Add
+                  </button>
+                </div>
+
+                <span className="bg-black text-white absolute right-1 top-1 p-1">
+                  New
+                </span>
+                <div className="flex justify-between py-2 px-1">
+                  <p className="text-base font-semibold">{v.price}</p>
+                  <CiHeart className="text-xl" />
+                </div>
+                <div className="text-gray-400 px-1">1 color</div>
               </div>
-
-              <span className="bg-black text-white absolute right-1 top-1 p-1">
-                New
-              </span>
-              <div className="flex justify-between py-2 px-1">
-                <p className="text-base font-semibold">{v.price}</p>
-                <CiHeart className="text-xl" />
-              </div>
-              {/* <div className="px-1">{v.price}</div> */}
-              <div className="text-gray-400 px-1">1 color</div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="text-center text-gray-500">No data available</p>
+          )}
         </Slider>
       </div>
     </div>

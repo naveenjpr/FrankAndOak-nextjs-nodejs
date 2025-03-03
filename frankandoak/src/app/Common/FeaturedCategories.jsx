@@ -11,16 +11,16 @@ import axios from "axios"
 export default function FeaturedCategories() {
   const [showdata, setshowdata] = useState([])
 
-  useEffect(() => {
-    axios
-      .post("http://localhost:5000/api/frontend/Featured_Categories/view")
-      .then((result) => {
-        setshowdata(result.data.data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [])
+  // useEffect(() => {
+  //   axios
+  //     .post("http://localhost:5000/api/frontend/Featured_Categories/view")
+  //     .then((result) => {
+  //       setshowdata(result.data.data)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // }, [])
 
   const categories = [
     {
