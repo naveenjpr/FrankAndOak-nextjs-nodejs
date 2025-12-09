@@ -1,29 +1,28 @@
-"use client"
-import Image from "next/image"
-import { CiHeart } from "react-icons/ci"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
-import { useEffect, useState } from "react"
-import Slider from "react-slick"
+"use client";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import { CiHeart } from "react-icons/ci";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 // Import Women's Images
-import frontwomen1 from "../../../public/2220136-3AL.01_aa5e57c6-1091-426a-bf1a-fefdb8ae972a_900x.webp"
-import frontwomen2 from "../../../public/2110351-4AC.01_450x.webp"
-import frontwomen3 from "../../../public/2510521-3AL.01_450x.webp"
-import frontwomen4 from "../../../public/2110353-3AL.01_450x.webp"
-import frontwomen5 from "../../../public/2220097-4CV.01_4c570fea-27f8-45ac-8354-202bc56f21da_450x.webp"
-import backwomen1 from "../../../public/mobile_07ed95de-6298-4061-b1bf-ef10e20312d7_1536x.webp"
-import backwomen2 from "../../../public/2110351-4AC.02_450x.webp"
-import backwomen3 from "../../../public/0C2A8900_450x.webp"
-import backwomen4 from "../../../public/2110353-3AL.02_450x.webp"
-import backwomen5 from "../../../public/2220136-3AL.01_aa5e57c6-1091-426a-bf1a-fefdb8ae972a_900x.webp"
-import axios from "axios"
+import frontwomen1 from "../../../public/2220136-3AL.01_aa5e57c6-1091-426a-bf1a-fefdb8ae972a_900x.webp";
+import frontwomen2 from "../../../public/2110351-4AC.01_450x.webp";
+import frontwomen3 from "../../../public/2510521-3AL.01_450x.webp";
+import frontwomen4 from "../../../public/2110353-3AL.01_450x.webp";
+import frontwomen5 from "../../../public/2220097-4CV.01_4c570fea-27f8-45ac-8354-202bc56f21da_450x.webp";
+import backwomen1 from "../../../public/mobile_07ed95de-6298-4061-b1bf-ef10e20312d7_1536x.webp";
+import backwomen2 from "../../../public/2110351-4AC.02_450x.webp";
+import backwomen3 from "../../../public/0C2A8900_450x.webp";
+import backwomen4 from "../../../public/2110353-3AL.02_450x.webp";
+import backwomen5 from "../../../public/2220136-3AL.01_aa5e57c6-1091-426a-bf1a-fefdb8ae972a_900x.webp";
 
 export default function Seasonmusthaves() {
-  const [data, setData] = useState([]) // डेटा स्टेट
+  const [data, setData] = useState([]); // डेटा स्टेट
 
-  const [category, setCategory] = useState("women")
-  const handleCategoryChange = (category) => setCategory(category)
+  const [category, setCategory] = useState("women");
+  const handleCategoryChange = (category) => setCategory(category);
 
   var settings = {
     dots: true,
@@ -31,7 +30,7 @@ export default function Seasonmusthaves() {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-  }
+  };
 
   const catimages = {
     women: [
@@ -98,17 +97,16 @@ export default function Seasonmusthaves() {
         price: "$90",
       },
     ],
-  }
+  };
 
   useEffect(() => {
-    axios
-      .post("http://localhost:5000/api/fronted/Tapbing_Categories/view")
-      .then((res) => {
-        setData(res.data.data)
-        console.log(res.data.data)
+    fetch("http://localhost:5000/api/fronted/Tapbing_Categories/view")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data.data);
       })
-      .catch(() => {})
-  }, [])
+      .catch(() => {});
+  }, []);
 
   return (
     <div className="w-full">
@@ -186,5 +184,5 @@ export default function Seasonmusthaves() {
         </Slider>
       </div>
     </div>
-  )
+  );
 }

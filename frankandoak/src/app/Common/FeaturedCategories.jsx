@@ -1,53 +1,9 @@
-import React, { useEffect, useState } from "react"
-import { catimages, images } from "../Common/Myarray"
-import Image from "next/image"
-import dresses1 from "../../../public/dress_9094f9f3-19a3-47a9-bab6-ec506941f682_900x.webp"
-import dresses2 from "../../../public/shirts_dd826432-9420-4a82-b2b3-965e50c84222_900x.webp"
-import dresses3 from "../../../public/tops_900x.webp"
-import dresses4 from "../../../public/shorts_900x.webp"
-import dresses5 from "../../../public/PLP_thumbnail_image_area_f8bf1730-2a49-4d7e-a730-0c9f8c3e37e3_900x.webp"
-import dresses6 from "../../../public/t-shirt_900x.webp"
-import axios from "axios"
-export default function FeaturedCategories() {
-  const [showdata, setshowdata] = useState([])
+import React, { useState, useEffect } from "react";
 
-  // useEffect(() => {
-  //   axios
-  //     .post("http://localhost:5000/api/frontend/Featured_Categories/view")
-  //     .then((result) => {
-  //       setshowdata(result.data.data)
-  //     })
-  //     .catch((error) => {
-  //       console.log(error)
-  //     })
-  // }, [])
+export default function FeaturedCategories({ categoryimagepath, category }) {
+  console.log("category", category);
+  console.log("categoryimagepath", categoryimagepath);
 
-  const categories = [
-    {
-      image: dresses1,
-      description: "Womens Dresses",
-    },
-    {
-      image: dresses2,
-      description: "Mens Shirts & Polo Shirts",
-    },
-    {
-      image: dresses3,
-      description: "Womens T-Shirts & Tops",
-    },
-    {
-      image: dresses4,
-      description: "Mens Shorts",
-    },
-    {
-      image: dresses5,
-      description: "Womens Skirts & Shorts",
-    },
-    {
-      image: dresses6,
-      description: "Mens T-Shirts",
-    },
-  ]
   return (
     <>
       <div className="w-[100%] bg-white mb-[100px]">
@@ -55,33 +11,29 @@ export default function FeaturedCategories() {
           Featured Categories
         </h1>
         <div className="grid lg:grid-cols-4 grid-cols-2  gap-[40px] md:px-[25px] px-[12px] cursor-pointer">
-          {showdata.length > 0
-            ? showdata.map((v, i) => (
+          {category.length > 0
+            ? category.map((v, i) => (
                 <div className="border" key={i}>
                   <img
-                    src={`http://localhost:5000/uploads/courses/${v.imageUrl}`}
+                    src={`http://localhost:5000/${categoryimagepath}${v.catImage}`}
                     alt="testing"
                     className="w-[100%] h-[100%]"
                   />
-                  <p className="mt-[5px] md:text-[16px] text-[8px] font-medium">
-                    {v.cloth_heading}
-                  </p>
+
+                  <div className="flex gap-1">
+                    {" "}
+                    <p className=" md:text-[16px] text-[8px] font-medium">
+                      {v.catName}
+                    </p>
+                    <p className=" md:text-[16px] text-[8px] font-medium">
+                      {v.categoryDescription}
+                    </p>{" "}
+                  </div>
                 </div>
               ))
-            : categories.map((v, i) => (
-                <div className="border" key={i}>
-                  <img
-                    src={v.image.src}
-                    alt="testing"
-                    className="w-[100%] h-[100%]"
-                  />
-                  <p className="mt-[5px] md:text-[16px] text-[8px]">
-                    {v.description}
-                  </p>
-                </div>
-              ))}
+            : "no data show"}
         </div>
       </div>
     </>
-  )
+  );
 }
